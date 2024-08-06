@@ -1,6 +1,9 @@
 package com.example.demo.DTO;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
+
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,7 +31,7 @@ public class EmployeeDTO {
     private LocalDate endDate;
     private PersonalInformationDTO personalInformation;
     private OtherInformationDTO otherInformation;
-    private ProjectDTO project;
+    private List<ProjectDTO> project;
 
 
 }

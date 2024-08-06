@@ -3,6 +3,9 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
+
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -57,9 +60,22 @@ public class Employee {
     @JoinColumn(name = "other_information_id", referencedColumnName = "id")
     private OtherInformation otherInformation;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_id")
+    /*
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id", referencedColumnName = "id")
     private Project project;
+    */
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "employee_project",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id")
+    )
+    private List<Project> project;
+
+
 }
 
 

@@ -2,9 +2,12 @@ package com.example.demo.service;
 
 import com.example.demo.mapper.ProjectMapper;
 import com.example.demo.model.Project;
+import com.example.demo.model.Employee;
 import com.example.demo.DTO.ProjectDTO;
+import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.repository.ProjectRepository;
 import jakarta.transaction.Transactional;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -14,7 +17,10 @@ import java.util.stream.Collectors;
 public class ProjectService {
 
     @Autowired
-    private ProjectRepository projectRepository;
+    private ProjectRepository projectRepository ;
+    @Autowired
+    private EmployeeRepository employeeRepository;
+    @Autowired
     private ProjectMapper projectMapper;
 
 
@@ -64,6 +70,23 @@ public class ProjectService {
             throw new RuntimeException("Project not found for id: " + id);
         }
         projectRepository.deleteById(id);
+    }
+
+    public ProjectDTO joinProjectsAndEmployees(Long projectId, List<Long> employeeIds) {
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new IllegalArgumentException("Project not found"));
+
+        if (employeeIds != null) {
+            List<Employee> employees = employeeIds.stream()
+                    .map(id -> employeeRepository.findById(id)
+                            .orElseThrow(() -> new IllegalArgumentException("Employee not found")))
+                    .collect(Collectors.toList());
+            project.setEmployees(employees);
+        }
+
+
+        Project savedProject = projectRepository.save(project);
+        return projectMapper.toDTO(savedProject);
     }
 }
 

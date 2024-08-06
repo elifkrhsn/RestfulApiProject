@@ -6,6 +6,7 @@ import com.example.demo.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/projects")
@@ -41,6 +42,15 @@ public class ProjectController {
     @DeleteMapping("/delete/{id}")
     public void deleteProject(@PathVariable Long id) {
         projectService.deleteProject(id);
+    }
+
+    //join employees and project operation
+    @PostMapping("/join/{id}")
+    public ProjectDTO joinProjectsAndEmployees(
+            @PathVariable Long id,
+            @RequestBody List<Long> employeeIds) {
+
+        return projectService.joinProjectsAndEmployees(id, employeeIds);
     }
 
 

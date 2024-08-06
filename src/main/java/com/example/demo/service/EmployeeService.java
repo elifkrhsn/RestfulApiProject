@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import com.example.demo.DTO.OtherInformationDTO;
+import com.example.demo.DTO.ProjectDTO;
 import com.example.demo.mapper.OtherInformationMapper;
 import com.example.demo.mapper.PersonalInformationMapper;
 import com.example.demo.mapper.ProjectMapper;
@@ -7,9 +9,11 @@ import com.example.demo.model.*;
 import com.example.demo.DTO.EmployeeDTO;
 import com.example.demo.mapper.EmployeeMapper;
 import com.example.demo.repository.EmployeeRepository;
-import jakarta.annotation.Resource;
 import jakarta.transaction.Transactional;
+import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +23,14 @@ public class EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
-    private EmployeeMapper employeeMapper;
+    @Autowired
+    private EmployeeMapper employeeMapper ;
+    @Autowired
     private PersonalInformationMapper personalInformationMapper;
+    @Autowired
     private OtherInformationMapper otherInformationMapper;
-    private ProjectMapper projectMapper;
+    @Autowired
+    private ProjectMapper projectMapper ;
 
 
     //for create operation
@@ -38,7 +46,7 @@ public class EmployeeService {
             employee.setOtherInformation(otherInformation);
         }
         if (employeeDTO.getProject() != null) {
-            Project project = projectMapper.toEntity(employeeDTO.getProject());
+            List<Project> project = Collections.singletonList(projectMapper.toEntity((ProjectDTO) employeeDTO.getProject()));
             employee.setProject(project);
         }
 
@@ -81,17 +89,17 @@ public class EmployeeService {
         existingEmployee.setEndDate(employeeDetails.getEndDate());
 
         if (employeeDetails.getPersonalInformation() != null) {
-            PersonalInformation personalInfo = PersonalInformationMapper.INSTANCE.toEntity(employeeDetails.getPersonalInformation());
+            PersonalInformation personalInfo = personalInformationMapper.toEntity(employeeDetails.getPersonalInformation());
             existingEmployee.setPersonalInformation(personalInfo);
         }
 
         if (employeeDetails.getOtherInformation() != null) {
-            OtherInformation otherInfo = OtherInformationMapper.INSTANCE.toEntity(employeeDetails.getOtherInformation());
+            OtherInformation otherInfo = otherInformationMapper.toEntity(employeeDetails.getOtherInformation());
             existingEmployee.setOtherInformation(otherInfo);
         }
 
         if (employeeDetails.getProject() != null) {
-            Project project = ProjectMapper.INSTANCE.toEntity(employeeDetails.getProject());
+            List<Project> project = Collections.singletonList(projectMapper.toEntity((ProjectDTO) employeeDetails.getProject()));
             existingEmployee.setProject(project);
         }
 
