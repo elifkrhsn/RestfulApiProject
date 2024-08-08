@@ -60,12 +60,6 @@ public class Employee {
     @JoinColumn(name = "other_information_id", referencedColumnName = "id")
     private OtherInformation otherInformation;
 
-    /*
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_id", referencedColumnName = "id")
-    private Project project;
-    */
-
 
     @ManyToMany
     @JoinTable(

@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.DTO.OtherInformationDTO;
+import com.example.demo.DTO.PersonalInformationDTO;
 import com.example.demo.DTO.ProjectDTO;
 import com.example.demo.mapper.OtherInformationMapper;
 import com.example.demo.mapper.PersonalInformationMapper;
@@ -88,19 +89,37 @@ public class EmployeeService {
         existingEmployee.setStartDate(employeeDetails.getStartDate());
         existingEmployee.setEndDate(employeeDetails.getEndDate());
 
-        if (employeeDetails.getPersonalInformation() != null) {
-            PersonalInformation personalInfo = personalInformationMapper.toEntity(employeeDetails.getPersonalInformation());
-            existingEmployee.setPersonalInformation(personalInfo);
+
+        if (existingEmployee.getPersonalInformation()== null){
+            existingEmployee.setPersonalInformation(new PersonalInformation());
         }
 
-        if (employeeDetails.getOtherInformation() != null) {
-            OtherInformation otherInfo = otherInformationMapper.toEntity(employeeDetails.getOtherInformation());
-            existingEmployee.setOtherInformation(otherInfo);
+        PersonalInformationDTO personalInformationDTO = employeeDetails.getPersonalInformation();
+        existingEmployee.getPersonalInformation().setBirthdate(personalInformationDTO.getBirthdate());
+        existingEmployee.getPersonalInformation().setIdentityNumber(personalInformationDTO.getIdentityNumber());
+        existingEmployee.getPersonalInformation().setMilitaryStatus(MilitaryStatus.valueOf(personalInformationDTO.getMilitaryStatus()));
+        existingEmployee.getPersonalInformation().setGender(Gender.valueOf(personalInformationDTO.getGender()));
+        existingEmployee.getPersonalInformation().setMaritalStatus(MaritalStatus.valueOf(personalInformationDTO.getMaritalStatus()));
+
+
+        if (existingEmployee.getOtherInformation()== null){
+            existingEmployee.setOtherInformation(new OtherInformation());
         }
 
-        if (employeeDetails.getProject() != null) {
-            List<Project> project = Collections.singletonList(projectMapper.toEntity((ProjectDTO) employeeDetails.getProject()));
-            existingEmployee.setProject(project);
+        OtherInformationDTO otherInformationDTO = employeeDetails.getOtherInformation();
+        existingEmployee.getOtherInformation().setFullAddress(otherInformationDTO.getFullAddress());
+        existingEmployee.getOtherInformation().setBankName(otherInformationDTO.getBankName());
+        existingEmployee.getOtherInformation().setIban(otherInformationDTO.getIban());
+        existingEmployee.getOtherInformation().setEmergencyContactName(otherInformationDTO.getEmergencyContactName());
+        existingEmployee.getOtherInformation().setEmergencyContactPhone(otherInformationDTO.getEmergencyContactPhone());
+
+
+        List<ProjectDTO> projects = employeeDetails.getProject();
+        if (projects != null) {
+            List<Project> updatedProject = projects.stream()
+                    .map(projectMapper::toEntity)
+                    .collect(Collectors.toList());
+            existingEmployee.setProject(updatedProject);
         }
 
         Employee savedEmployee = employeeRepository.save(existingEmployee);
