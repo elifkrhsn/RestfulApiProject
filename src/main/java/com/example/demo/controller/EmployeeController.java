@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.DTO.EmployeeDTO;
+import com.example.demo.filter.FilterEmployee;
 import com.example.demo.mapper.EmployeeMapper;
 import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.service.EmployeeService;
@@ -49,6 +50,13 @@ public class EmployeeController {
     @DeleteMapping("/delete/{id}")
     public void deleteEmployee(@PathVariable Long id) {
         employeeService.deleteEmployee(id);
+    }
+
+
+    //filtered employees
+    @PostMapping("/filtered")
+    public List<EmployeeDTO> filteredEmployees(@RequestBody FilterEmployee filter) {
+        return employeeService.getFilteredEmployees(filter);
     }
 
 

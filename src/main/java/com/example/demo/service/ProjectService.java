@@ -1,11 +1,16 @@
 package com.example.demo.service;
 
+import com.example.demo.DTO.EmployeeDTO;
+import com.example.demo.filter.FilterEmployee;
+import com.example.demo.filter.FilterProject;
 import com.example.demo.mapper.ProjectMapper;
 import com.example.demo.model.Project;
 import com.example.demo.model.Employee;
 import com.example.demo.DTO.ProjectDTO;
 import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.repository.ProjectRepository;
+import com.example.demo.specification.EmployeeSpecification;
+import com.example.demo.specification.ProjectSpecification;
 import jakarta.transaction.Transactional;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,5 +93,13 @@ public class ProjectService {
         Project savedProject = projectRepository.save(project);
         return projectMapper.toDTO(savedProject);
     }
+
+
+    @Transactional
+    public List<ProjectDTO> getFilteredProjects(FilterProject filter) {
+        List<Project> projects = projectRepository.findAll(ProjectSpecification.filter(filter));
+        return projects.stream().map(projectMapper::toDTO).collect(Collectors.toList());
+    }
+
 }
 

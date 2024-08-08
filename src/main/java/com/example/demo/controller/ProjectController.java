@@ -1,7 +1,10 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.DTO.EmployeeDTO;
 import com.example.demo.DTO.ProjectDTO;
+import com.example.demo.filter.FilterEmployee;
+import com.example.demo.filter.FilterProject;
 import com.example.demo.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -51,6 +54,12 @@ public class ProjectController {
             @RequestBody List<Long> employeeIds) {
 
         return projectService.joinProjectsAndEmployees(id, employeeIds);
+    }
+
+    //filtered employees
+    @PostMapping("/filtered")
+    public List<ProjectDTO> filteredProjects(@RequestBody FilterProject filter) {
+        return projectService.getFilteredProjects(filter);
     }
 
 
