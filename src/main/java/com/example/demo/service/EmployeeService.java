@@ -148,11 +148,14 @@ public class EmployeeService {
 
  */
 
-
+/*
     public EmployeeProjectionDTO getEmployeeProjectionById(Long id) {
         EmployeeProjection employeeProjection = employeeRepository.findEmployeeProjectionById(id);
         return employeeMapper.projectionToEmployeeProjectionDTO(employeeProjection);
     }
+
+
+ */
 
 /*
 

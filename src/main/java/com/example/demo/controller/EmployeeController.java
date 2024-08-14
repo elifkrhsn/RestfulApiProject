@@ -71,13 +71,13 @@ public class EmployeeController {
         return employeeService.getEmployeesByLastName(lastName);
     }
 */
-
+/*
     //projection for finding all information by employee's id
     @GetMapping("/projection/{id}")
     public EmployeeProjectionDTO getEmployeeProjectionById(@PathVariable Long id){
         return employeeService.getEmployeeProjectionById(id);
     }
-
+*/
 /*
 
     //projection for finding requested information (specified in repository) by employee's email

@@ -2,6 +2,8 @@ package com.example.demo.DTO;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import com.example.demo.validation.UniqueEmployeeDetails;
 import jakarta.validation.constraints.*;
 
 import lombok.Data;
@@ -15,6 +17,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@UniqueEmployeeDetails
 public class EmployeeDTO {
 
     private Long id;

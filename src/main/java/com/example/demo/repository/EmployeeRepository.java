@@ -13,9 +13,18 @@ import java.util.Optional;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long>, JpaSpecificationExecutor<Employee> {
 
+    boolean existsByEmail(String email);
+    boolean existsByPhoneNumber(String phoneNumber);
+    @Query("SELECT COUNT(e) > 0 FROM Employee e WHERE e.otherInformation.iban = :iban")
+    boolean existsByIban(@Param("iban") String iban);
 
-    @Query("SELECT e FROM Employee e WHERE e.id = :id AND e.otherInformation.id = :id AND e.personalInformation.id= :id")
+    @Query("SELECT COUNT(e) > 0 FROM Employee e WHERE e.personalInformation.identityNumber = :identityNumber")
+    boolean existsByIdentityNumber(@Param("identityNumber") String identityNNumber);
+/*
+    @Query("SELECT new com.example.demo.dto.EmployeeProjectionDTO(e.id, e.firstName, e.lastName, e.level, e.phoneNumber, e.email, e.birthDate, e.workMode, e.contractType, e.team, e.startDate, e.endDate, e.identityNumber, e.militaryStatus, e.gender, e.maritalStatus, e.fullAddress, e.bankName, e.iban, e.emergencyContactName, e.emergencyContactPhone, e.projectName, e.projectType, e.department, e.vpnUsername, e.vpnPassword, e.environmentInfo) FROM Employee e WHERE e.id = :id")
     EmployeeProjection findEmployeeProjectionById(Long id);
+
+ */
 
 /*
 

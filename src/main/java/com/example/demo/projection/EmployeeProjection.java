@@ -11,17 +11,30 @@ public interface EmployeeProjection {
     Long getId();
     String getFirstName();
     String getLastName();
-    Level getLevel();
+    String getLevel();
     String getPhoneNumber();
     String getEmail();
     LocalDate getBirthDate();
-    WorkMode getWorkMode();
-    ContractType getContractType();
+    String getWorkMode();
+    String getContractType();
     String getTeam();
     LocalDate getStartDate();
     LocalDate getEndDate();
-    PersonalInformation getPersonalInformation();
-    OtherInformation getOtherInformation();
-    List<ProjectDTO> getProject();
+    String getIdentityNumber();
+    String getMilitaryStatus();
+    String getGender();
+    String getMaritalStatus();
+    String getFullAddress();
+    String getBankName();
+    String getIban();
+    String getEmergencyContactName();
+    String getEmergencyContactPhone();
+    String getProjectName();
+    String getProjectType();
+    String getDepartment();
+    String getVpnUsername();
+    String getVpnPassword();
+    String getEnvironmentInfo();
+
 
 }

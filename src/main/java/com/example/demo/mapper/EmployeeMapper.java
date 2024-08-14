@@ -257,9 +257,22 @@ public class EmployeeMapper {
         employeeProjectionDTO.setTeam(projection.getTeam());
         employeeProjectionDTO.setStartDate(projection.getStartDate());
         employeeProjectionDTO.setEndDate(projection.getEndDate());
-        employeeProjectionDTO.setPersonalInformation(projection.getPersonalInformation());
-        employeeProjectionDTO.setOtherInformation(projection.getOtherInformation());
-        employeeProjectionDTO.setProject(projection.getProject());
+        employeeProjectionDTO.setIdentityNumber(projection.getIdentityNumber());
+        employeeProjectionDTO.setMilitaryStatus(projection.getMilitaryStatus());
+        employeeProjectionDTO.setGender(projection.getGender());
+        employeeProjectionDTO.setMaritalStatus(projection.getMaritalStatus());
+        employeeProjectionDTO.setFullAddress(projection.getFullAddress());
+        employeeProjectionDTO.setBankName(projection.getBankName());
+        employeeProjectionDTO.setIban(projection.getIban());
+        employeeProjectionDTO.setEmergencyContactName(projection.getEmergencyContactName());
+        employeeProjectionDTO.setEmergencyContactPhone(projection.getEmergencyContactPhone());
+        employeeProjectionDTO.setProjectName(projection.getProjectName());
+        employeeProjectionDTO.setProjectType(projection.getProjectType());
+        employeeProjectionDTO.setDepartment(projection.getDepartment());
+        employeeProjectionDTO.setEndDate(projection.getEndDate());
+        employeeProjectionDTO.setVpnUsername(projection.getVpnUsername());
+        employeeProjectionDTO.setVpnPassword(projection.getVpnPassword());
+        employeeProjectionDTO.setEnvironmentInfo(projection.getEnvironmentInfo());
 
         return employeeProjectionDTO;
     }
