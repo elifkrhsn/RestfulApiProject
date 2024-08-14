@@ -94,7 +94,7 @@ public class ProjectService {
         return projectMapper.toDTO(savedProject);
     }
 
-
+//include specification
     @Transactional
     public List<ProjectDTO> getFilteredProjects(FilterProject filter) {
         List<Project> projects = projectRepository.findAll(ProjectSpecification.filter(filter));

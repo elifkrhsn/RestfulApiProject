@@ -35,6 +35,4 @@ public class OtherInformation {
     @OneToOne(mappedBy = "otherInformation")
     private Employee employee;
 
-
-
 }

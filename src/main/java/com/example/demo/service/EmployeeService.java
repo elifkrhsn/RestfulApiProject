@@ -1,19 +1,16 @@
 package com.example.demo.service;
 
-import com.example.demo.DTO.OtherInformationDTO;
-import com.example.demo.DTO.PersonalInformationDTO;
-import com.example.demo.DTO.ProjectDTO;
+import com.example.demo.DTO.*;
 import com.example.demo.filter.FilterEmployee;
 import com.example.demo.mapper.OtherInformationMapper;
 import com.example.demo.mapper.PersonalInformationMapper;
 import com.example.demo.mapper.ProjectMapper;
 import com.example.demo.model.*;
-import com.example.demo.DTO.EmployeeDTO;
 import com.example.demo.mapper.EmployeeMapper;
+import com.example.demo.projection.EmployeeProjection;
 import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.specification.EmployeeSpecification;
 import jakarta.transaction.Transactional;
-import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -143,5 +140,30 @@ public class EmployeeService {
         return employees.stream().map(employeeMapper::toDTO).collect(Collectors.toList());
     }
 
+/*
+    //projection for finding employee by their last name
+    public List<EmployeeProjectionDTO> getEmployeesByLastName(String lastName) {
+        return employeeRepository.findByLastName(lastName);
+    }
 
+ */
+
+
+    public EmployeeProjectionDTO getEmployeeProjectionById(Long id) {
+        EmployeeProjection employeeProjection = employeeRepository.findEmployeeProjectionById(id);
+        return employeeMapper.projectionToEmployeeProjectionDTO(employeeProjection);
+    }
+
+/*
+
+    public EmployeeProjectionDTO getEmployeeProjectionByEmail(String email) {
+        EmployeeProjection employeeProjection = employeeRepository.findEmployeeProjectionByEmail(email);
+        return employeeMapper.projectionToEmployeeProjectionDTO(employeeProjection);
+    }
+*/
+
+    public List<EmployeeProjection> getAllEmployeeProjections() {
+        return employeeRepository.findAllEmployees();
+
+    }
 }

@@ -4,6 +4,7 @@ import com.example.demo.DTO.EmployeeDTO;
 import com.example.demo.DTO.OtherInformationDTO;
 import com.example.demo.DTO.PersonalInformationDTO;
 import com.example.demo.DTO.ProjectDTO;
+import com.example.demo.DTO.EmployeeProjectionDTO;
 import com.example.demo.model.ContractType;
 import com.example.demo.model.Employee;
 import com.example.demo.model.Gender;
@@ -14,10 +15,12 @@ import com.example.demo.model.OtherInformation;
 import com.example.demo.model.PersonalInformation;
 import com.example.demo.model.Project;
 import com.example.demo.model.WorkMode;
+import com.example.demo.projection.EmployeeProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -239,4 +242,27 @@ public class EmployeeMapper {
 
         return list1;
     }
+
+    public EmployeeProjectionDTO projectionToEmployeeProjectionDTO(EmployeeProjection projection) {
+        EmployeeProjectionDTO employeeProjectionDTO = new EmployeeProjectionDTO();
+        employeeProjectionDTO.setId(projection.getId());
+        employeeProjectionDTO.setFirstName(projection.getFirstName());
+        employeeProjectionDTO.setLastName(projection.getLastName());
+        employeeProjectionDTO.setLevel(projection.getLevel());
+        employeeProjectionDTO.setPhoneNumber(projection.getPhoneNumber());
+        employeeProjectionDTO.setEmail(projection.getEmail());
+        employeeProjectionDTO.setBirthDate(projection.getBirthDate());
+        employeeProjectionDTO.setWorkMode(projection.getWorkMode());
+        employeeProjectionDTO.setContractType(projection.getContractType());
+        employeeProjectionDTO.setTeam(projection.getTeam());
+        employeeProjectionDTO.setStartDate(projection.getStartDate());
+        employeeProjectionDTO.setEndDate(projection.getEndDate());
+        employeeProjectionDTO.setPersonalInformation(projection.getPersonalInformation());
+        employeeProjectionDTO.setOtherInformation(projection.getOtherInformation());
+        employeeProjectionDTO.setProject(projection.getProject());
+
+        return employeeProjectionDTO;
+    }
+
+
 }
