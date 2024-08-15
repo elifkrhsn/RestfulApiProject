@@ -1,5 +1,10 @@
 package com.example.demo.projection;
 
+import com.example.demo.model.*;
+
+import java.time.LocalDate;
+
+
 public interface ProjectProjection {
 
     Long getId();
@@ -8,5 +13,5 @@ public interface ProjectProjection {
     String getDepartment();
     String getVpnUsername();
     String getEnvironmentInfo();
-    
+
 }

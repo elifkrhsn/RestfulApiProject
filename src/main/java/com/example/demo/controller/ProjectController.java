@@ -5,6 +5,7 @@ import com.example.demo.DTO.EmployeeDTO;
 import com.example.demo.DTO.ProjectDTO;
 import com.example.demo.filter.FilterEmployee;
 import com.example.demo.filter.FilterProject;
+import com.example.demo.projection.ProjectProjection;
 import com.example.demo.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -60,6 +61,12 @@ public class ProjectController {
     @PostMapping("/filtered")
     public List<ProjectDTO> filteredProjects(@RequestBody FilterProject filter) {
         return projectService.getFilteredProjects(filter);
+    }
+
+    //projection for finding information of project by project name
+    @GetMapping("/projection/{projectName}")
+    public ProjectProjection getProjectProjectionByProjectName(@PathVariable String projectName){
+        return projectService.getProjectDetailsByProjectName(projectName);
     }
 
 

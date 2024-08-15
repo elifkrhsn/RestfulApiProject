@@ -7,7 +7,9 @@ import com.example.demo.mapper.PersonalInformationMapper;
 import com.example.demo.mapper.ProjectMapper;
 import com.example.demo.model.*;
 import com.example.demo.mapper.EmployeeMapper;
-import com.example.demo.projection.EmployeeProjection;
+import com.example.demo.projection.EmployeeEmailProjection;
+import com.example.demo.projection.EmployeeFullNameProjection;
+import com.example.demo.projection.EmployeePhoneNumberProjection;
 import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.specification.EmployeeSpecification;
 import jakarta.transaction.Transactional;
@@ -140,33 +142,22 @@ public class EmployeeService {
         return employees.stream().map(employeeMapper::toDTO).collect(Collectors.toList());
     }
 
-/*
-    //projection for finding employee by their last name
-    public List<EmployeeProjectionDTO> getEmployeesByLastName(String lastName) {
-        return employeeRepository.findByLastName(lastName);
-    }
-
- */
-
-/*
-    public EmployeeProjectionDTO getEmployeeProjectionById(Long id) {
-        EmployeeProjection employeeProjection = employeeRepository.findEmployeeProjectionById(id);
-        return employeeMapper.projectionToEmployeeProjectionDTO(employeeProjection);
+//service of projection by email
+    public EmployeeEmailProjection getEmployeeDetailsByEmail(String email) {
+        return employeeRepository.findEmployeeProjectionByEmail(email);
     }
 
 
- */
-
-/*
-
-    public EmployeeProjectionDTO getEmployeeProjectionByEmail(String email) {
-        EmployeeProjection employeeProjection = employeeRepository.findEmployeeProjectionByEmail(email);
-        return employeeMapper.projectionToEmployeeProjectionDTO(employeeProjection);
+//service of projection by phone number
+    public EmployeePhoneNumberProjection getEmployeeDetailsByPhoneNumber(String phoneNumber) {
+        return employeeRepository.findEmployeeProjectionByPhoneNumber(phoneNumber);
     }
-*/
 
-    public List<EmployeeProjection> getAllEmployeeProjections() {
-        return employeeRepository.findAllEmployees();
 
+//service of projection by full name
+    public EmployeeFullNameProjection getEmployeeDetailsByFullName(String fullName) {
+        return employeeRepository.findEmployeeProjectionByFullName(fullName);
     }
+
+
 }

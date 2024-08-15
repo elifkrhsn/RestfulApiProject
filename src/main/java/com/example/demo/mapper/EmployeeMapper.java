@@ -15,16 +15,15 @@ import com.example.demo.model.OtherInformation;
 import com.example.demo.model.PersonalInformation;
 import com.example.demo.model.Project;
 import com.example.demo.model.WorkMode;
-import com.example.demo.projection.EmployeeProjection;
+import com.example.demo.projection.EmployeeEmailProjection;
+import com.example.demo.projection.EmployeeFullNameProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.annotation.processing.Generated;
 
 @Component
 public class EmployeeMapper {
@@ -243,11 +242,11 @@ public class EmployeeMapper {
         return list1;
     }
 
-    public EmployeeProjectionDTO projectionToEmployeeProjectionDTO(EmployeeProjection projection) {
+    public EmployeeProjectionDTO projectionToEmployeeProjectionDTO(EmployeeFullNameProjection projection) {
         EmployeeProjectionDTO employeeProjectionDTO = new EmployeeProjectionDTO();
         employeeProjectionDTO.setId(projection.getId());
-        employeeProjectionDTO.setFirstName(projection.getFirstName());
-        employeeProjectionDTO.setLastName(projection.getLastName());
+        //employeeProjectionDTO.setFirstName(projection.getFirstName());
+        //employeeProjectionDTO.setLastName(projection.getLastName());
         employeeProjectionDTO.setLevel(projection.getLevel());
         employeeProjectionDTO.setPhoneNumber(projection.getPhoneNumber());
         employeeProjectionDTO.setEmail(projection.getEmail());

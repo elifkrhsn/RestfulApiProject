@@ -7,6 +7,7 @@ import com.example.demo.mapper.ProjectMapper;
 import com.example.demo.model.Project;
 import com.example.demo.model.Employee;
 import com.example.demo.DTO.ProjectDTO;
+import com.example.demo.projection.ProjectProjection;
 import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.repository.ProjectRepository;
 import com.example.demo.specification.EmployeeSpecification;
@@ -99,6 +100,11 @@ public class ProjectService {
     public List<ProjectDTO> getFilteredProjects(FilterProject filter) {
         List<Project> projects = projectRepository.findAll(ProjectSpecification.filter(filter));
         return projects.stream().map(projectMapper::toDTO).collect(Collectors.toList());
+    }
+
+    //service of projection for getting project details by project name
+    public ProjectProjection getProjectDetailsByProjectName(String projectName) {
+        return projectRepository.findProjectProjectionByProjectName(projectName);
     }
 
 }
